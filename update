@@ -1,0 +1,17 @@
+#!/bin/bash
+
+die()
+{
+  echo "ERROR: $*" 1>&2
+  exit 1
+}
+
+if [ ! -d "/boot/EFI/BOOT" ]; then
+  echo "You needs to mount /boot first."
+  exit -1
+fi
+
+echo "downloading ... 'bootx64.efi'"
+wget $(cat /etc/zep/repo)/bootx64.efi -O /boot/EFI/BOOT/bootx64.efi || die "Could not download 'bootx64.efi'"
+echo "... done"
+
