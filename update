@@ -7,11 +7,12 @@ die()
 }
 
 if [ ! -d "/boot/EFI/BOOT" ]; then
-  echo "You needs to mount /boot first."
+  echo "You need to mount /boot first."
   exit -1
 fi
 
 echo "downloading ... 'bootx64.efi'"
-wget $(cat /etc/zep/repo)/bootx64.efi -O /boot/EFI/BOOT/bootx64.efi || die "Could not download 'bootx64.efi'"
+# TODO: use default repo if /etc/zep/repo doesn't exist
+wget $(cat /etc/zep/repo)/bootx64.efi -O /boot/EFI/BOOT/bootx64.efi || die "Could not download 'bootx64.efi'" # TODO: save to tmp, only move if download successful
 echo "... done"
 
